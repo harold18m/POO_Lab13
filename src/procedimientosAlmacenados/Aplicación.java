@@ -55,7 +55,7 @@ public class Aplicación extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 60, 243, 243);
+		scrollPane.setBounds(10, 60, 297, 243);
 		contentPane.add(scrollPane);
 		JTextArea area = new JTextArea();
 		scrollPane.setViewportView(area);
@@ -65,29 +65,30 @@ public class Aplicación extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Connection conexion = instanciaMysql.conectar();
-					CallableStatement procedimientoAlmacenado = conexion.prepareCall("{call mostrarAlumnos()} ");
+					CallableStatement procedimientoAlmacenado = conexion.prepareCall("{call mostrarAlumnos} ");
 					ResultSet consulta = procedimientoAlmacenado.executeQuery();
 					
 			
 					while(consulta.next()){
 						
-						area.append((consulta.getString(1) + "  / "));
-						area.append((consulta.getString(2) + "  / "));
-						area.append((consulta.getString(3) + "  / "));
-						area.append((consulta.getString(4) + "  / "));
+						area.append((consulta.getInt(1) + " - "));
+						area.append((consulta.getString(2) + " - "));
+						area.append((consulta.getString(3) + " - "));
+						area.append((consulta.getString(4) + " - "));
+						area.append((consulta.getString(5) + ""));
 						area.append("\n");
-			        
-						
+					} 
+					
 			            procedimientoAlmacenado.close();
 			            instanciaMysql.cerrarConexion();
-					}
+					
 						
 				}catch(SQLException error) {
 					System.out.println(error);
 				}
 			}
 		});
-		btnMostrar.setBounds(30, 26, 121, 23);
+		btnMostrar.setBounds(10, 26, 141, 23);
 		contentPane.add(btnMostrar);
 		
 		
@@ -138,7 +139,7 @@ public class Aplicación extends JFrame {
 		            procedimientoAlmacenado.setString(1,textApellidos.getText());
 		            procedimientoAlmacenado.setString(2,textNombres.getText());
 		            procedimientoAlmacenado.setString(3,textDireccion.getText());
-		            procedimientoAlmacenado.setString(3,textDistrito.getText());
+		            procedimientoAlmacenado.setString(4,textDistrito.getText());
 		            procedimientoAlmacenado.executeUpdate();
 		            
 		            JOptionPane.showMessageDialog(null,"Alumno registrado");
@@ -160,7 +161,7 @@ public class Aplicación extends JFrame {
 				area.setText("");
 			}
 		});
-		btnLimpiar.setBounds(184, 26, 89, 23);
+		btnLimpiar.setBounds(218, 26, 89, 23);
 		contentPane.add(btnLimpiar);
 		
 		

@@ -1,7 +1,6 @@
 package procedimientosAlmacenados;
 import java.sql.*;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
 
 public class Conexion {
 	private Conexion(){
@@ -46,6 +45,7 @@ public class Conexion {
 	}
 	
 	//patron singleton
+	
 	public static Conexion getInstance() {
 		if(instancia == null) {
 			instancia = new Conexion();
